@@ -1,0 +1,72 @@
+// Pseudo code
+
+GNM = {
+    n: Vertices,
+    m: Edges,
+    g: Graph,
+}
+
+Graph = Matrix[Vertices][Vertices]
+
+Vertices = Integer
+Edges = Integer
+
+gnmGraphImperative = (n, m) => {
+    let graph = newGraph(n);
+    let edges = 0;
+    while (edges < m) {
+        let a = Math.floor(Math.random() * n);
+        let b = Math.floor(Math.random() * n);
+        if (a !== b) {
+            graph.addEdge(a, b);
+            edges++;
+        }
+    }
+    return graph;
+}
+
+GNP = {
+    n: Vertices,
+    p: Probability,
+    g: Graph,
+}
+
+gnpGraphImperative = (n, p) => {
+    let graph = newGraph(n);
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            if (Math.random() < p) {
+                graph.addEdge(i, j);
+            }
+        }
+    }
+    return graph;
+}
+
+newGraph = (n) => Graph
+addEdge = (a, b) => void
+
+
+gnpGraphFunctional = (n, p) => {
+    let graph = newGraph(n);
+    return graph.map((row, i) => {
+        return row.map((_, j) => {
+            return i < j && Math.random() < p;
+        });
+    });
+}
+
+gnmGraphFunctional = (n, m) => {
+    let graph = newGraph(n);
+    let edges = 0;
+    return graph.map((row, i) => {
+        return row.map((_, j) => {
+            if (i < j && edges < m) {
+                edges++;
+                return true;
+            }
+            return false;
+        });
+    });
+}
+```
